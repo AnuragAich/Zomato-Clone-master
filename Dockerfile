@@ -1,23 +1,20 @@
-# Use Node.js 16 slim as the base image
-FROM node:16-slim
+# Use Node.js 18 slim as the base image
+FROM node:18-slim
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json to the container (for dependency installation)
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of the application files to the container
 COPY . .
 
-# Build the React app
-RUN npm run build
-
-# Expose port 3000 (or the port your app is configured to listen on)
+# Expose the port the app will run on (example: 3000)
 EXPOSE 3000
 
-# Start your Node.js server (assuming it serves the React app)
+# Command to run the application (change according to your app)
 CMD ["npm", "start"]
